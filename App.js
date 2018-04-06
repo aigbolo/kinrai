@@ -14,7 +14,7 @@ const RootStack = StackNavigator({
   }
 },
 {
-  initialRouteName: 'Search'
+  initialRouteName: 'Result'
 },
  )
 export default class App extends React.Component {

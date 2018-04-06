@@ -3,7 +3,6 @@ import {View,Button,Text,ImageBackground,StyleSheet,TouchableOpacity,KeyboardAvo
 import Input from '../src/input';
 import Criteria from '../src/criteria';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Bubbles, DoubleBounce, Bars, Pulse } from 'react-native-loader';
 export default class SearchScreen extends React.Component{
     static navigationOptions = {header:null};
     
@@ -28,12 +27,10 @@ export default class SearchScreen extends React.Component{
                 <View style={styles.buttonView} >
                     <TouchableOpacity style={styles.buttonSearch} onPress={() => this.props.navigation.navigate('Result')}>
                         <Text style={styles.buttonText}>
-                        <Icon name="leanpub" size={25} color="white" /> ทำอะไรได้บ้าง</Text>
+                        <Icon name="leanpub" size={25} color="white" /> ค้นหา</Text>
                     </TouchableOpacity >
                 </View>
-                {/* <View style={{flexDirection: 'column'}}>
-                    <Bubbles size={10} color="#FFF" />
-                </View> */}
+               
                 {/* <KeyboardAvoidingView  style={styles.container} behavior="padding"/> */}
             </ImageBackground>
             
@@ -49,7 +46,7 @@ const styles = StyleSheet.create({
       },
     backgroundImage: {
         flex: 1,
-        flexDirection: 'column',flex: 1,
+        flexDirection: 'column',
         // width: '100%',
         // height: null,
         
