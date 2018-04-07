@@ -55,7 +55,13 @@ const styles = StyleSheet.create({
     //     flexDirection: 'column',flex: 1,
     //     backgroundColor:'transparent'
     // },
-    brand:{marginTop:50,marginBottom:10,textAlign:'center',fontSize:30,fontWeight:'bold',color:'white'},
+    brand:{marginTop:50,
+        marginBottom:10,
+        textAlign:'center',
+        fontSize:30,
+        fontWeight:'bold',
+        fontFamily:'Kanit',
+        color:'white'},
     listView:{
         flexDirection: 'row',
         alignItems: 'center',

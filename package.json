@@ -2,6 +2,11 @@
   "name": "kinrai",
   "version": "0.0.1",
   "private": true,
+  "rnpm": {
+    "assets": [
+      "./assets/fonts"
+    ]
+  },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
@@ -11,8 +16,8 @@
     "mobx-react": "^5.0.0",
     "pcmli.umbrella.react-native": "^10.0.2",
     "prop-types": "^15.6.1",
-    "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "react-native": "0.54.4",
     "react-native-animatable": "^1.2.4",
     "react-native-loader": "^1.2.1",

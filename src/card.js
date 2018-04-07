@@ -18,9 +18,11 @@ const styles = {
         borderWidth:1,
         borderRadius: 2,
         shadowOffset: {width:0,height:2},
-        marginLeft: 5,
-        marginRight: 5,
-        marginTop:10,
+        paddingLeft:5,
+        paddingRight:5,
+        marginLeft:2,
+        marginRight:2,
+        marginTop:5,
     }
 }
 
