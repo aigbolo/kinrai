@@ -3,12 +3,12 @@ import {View} from 'react-native';
 import FoodList from '../src/foodList';
 export default class ResultScreen extends React.Component{
     static navigationOptions = {
-        title:'Result'
+        title:'ผลการค้นหา'
     };
     render(){
         return(
                
-                <FoodList/>
+                <FoodList navigation={this.props.navigation}/>
         )
     }
 }

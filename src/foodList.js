@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {inject,observer} from 'mobx-react/native';
 import { Bubbles, DoubleBounce, Bars, Pulse } from 'react-native-loader';
 import {Fonts} from './utils/fonts';
-@inject('foodStore')
+@inject('foodStore','criteriaStore')
 @observer
 export default class FoodList extends React.Component{
     
@@ -15,23 +15,28 @@ export default class FoodList extends React.Component{
         this.state = {isReady:false};
         this.renderList = this.renderList.bind(this);
         this.rederIngredients = this.rederIngredients.bind(this);
+        this.goToDetail = this.goToDetail.bind(this);
     }
     async componentDidMount(){
-       await this.props.foodStore.fetchFoods(''); 
+       await this.props.foodStore.findFoodByKeyword(this.props.criteriaStore.materials); 
        this.setState({isReady:true});
+    }
+
+    goToDetail(url){
+        this.props.navigation.navigate('Detail',{url:url});
     }
     
     renderList(food){
         return(
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>this.goToDetail(food.url)}>
             <Card>
             <View style={{minHeight:100,flex:1,flexDirection:'row',flexWrap:'wrap'}}>
                 <View style={styles.imageView}>
-                    <Image style={styles.image}  source={{uri:'https://scontent.fbkk5-1.fna.fbcdn.net/v/t1.0-9/29512415_2142473675986089_3521362667077245708_n.jpg?_nc_cat=0&oh=1909f5b4068154d721e2fcfbb357c4b5&oe=5B2FCDBB'}}/>
+                    <Image style={styles.image}  source={{uri:food.image}}/>
                 </View>
                 <View style={styles.detailView}>
                     <Text style={styles.foodName}>{food.foodName}</Text>
-                    <Text style={styles.ingredientLabel}>วัตถุดิบ</Text>
+                    <Text style={styles.ingredientLabel}>ส่วนผสม</Text>
                     <View style={styles.ingredientsView}>
                         {this.rederIngredients(food.ingredients)}
                     </View>
@@ -45,21 +50,28 @@ export default class FoodList extends React.Component{
 
     rederIngredients(ingredients){
        return ingredients.map((item,index)=>{
-                return <Text key={index} style={styles.ingredient}>{item.name}</Text>
+                return <Text key={index} style={item.match?styles.ingredientMatched:styles.ingredient}>{item.name}</Text>
             
         })
     }
+
 
     render(){
             return (
                 <View style={{flexDirection: 'column'}}>
                 {!this.state.isReady?
                 <View style={{alignItems:'center',justifyContent:'center'}}><Bubbles size={10} color="#ffcd2a" /></View>
-                :null
+                :
+                this.props.foodStore.result.length == 0?
+                 <Text style={styles.emptyFood}>ไม่พบ "{this.props.criteriaStore.materials.toString()}" ในส่วนผสม</Text>
+                 :null
                 }
+               
+
+
                 
                 <FlatList 
-                    data={this.props.foodStore.foods}
+                    data={this.props.foodStore.result}
                     renderItem={(item)=>this.renderList(item.item)}
                     keyExtractor={(item,index)=>index.toString()}/>
                 </View> 
@@ -109,6 +121,21 @@ const styles = StyleSheet.create({
         paddingLeft:10,
         paddingRight:10,
         borderRadius:10
-    }
+    }, 
+    ingredientMatched:{
+        fontFamily:Fonts.kanit.regular,
+        backgroundColor:'pink',
+        marginRight:5,
+        marginBottom:5,
+        paddingLeft:10,
+        paddingRight:10,
+        borderRadius:10
+    }, 
+    emptyFood:{
+        fontFamily:Fonts.kanit.medium,
+        fontSize:15,
+        paddingLeft:5,
+        paddingTop:5
+    },
 
 })

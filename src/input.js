@@ -17,7 +17,7 @@ export default class Input extends React.Component{
 
     onSubmitEditing(){
         this.props.criteriaStore.addCriteria();
-        this.setState({placeholder:'เราเหลืออะไรบ้างน้า...'});
+        this.props.navigation.navigate('Result');
     }
 
     onChangeText(text){

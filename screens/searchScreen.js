@@ -19,7 +19,7 @@ export default class SearchScreen extends React.Component{
                <View>
                    <Text style={styles.brand}>KinRai</Text>
                </View>
-               <Input/>
+               <Input navigation={this.props.navigation}/>
                <View style={styles.listView}>
                 <Criteria/>
                 </View>
