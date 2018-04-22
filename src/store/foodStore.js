@@ -14,16 +14,19 @@ export default class FoodStore{
     async findFoodByKeyword(criteria){
         await this.fetchFoods();
 
-        this.result = await this.foods.map((food,index)=>{
+        this.result = await this.foods.filter((food,index)=>{
             let ingredients = [];
             let matched = 0;
+            let isContain = false;
             for(let ingre of food.ingredients){
                 ingre = {...ingre,match:false}
                 if(criteria.length == 0){
                     isContain = true;
                 }else{
                     for(let cri of criteria){
-                        if(ingre.name == cri){
+                        console.log(ingre.name+':::'+cri)
+                        console.log(ingre.name.includes(cri))
+                        if(ingre.name.includes(cri)){
                             isContain = true;
                             ingre = {...ingre,match:true}
                             matched += 1;
@@ -35,10 +38,11 @@ export default class FoodStore{
             var alterData = {ingredients:ingredients,macthedTotal:matched,totalIngredients:food.ingredients.length}
             food = Object.assign(food,alterData)
             console.log('food assign',food);
-            return food;
+            return isContain;
         })
 
-        this.result.sort(()=>sorting);
+        console.log('result',this.result);
+        // this.result.sort(()=>this.sorting);
         return this.result;
     }
 

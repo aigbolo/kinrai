@@ -6,7 +6,7 @@ export default class CriteriaStore{
     
     async addCriteria(){
         if(this.text.trim()){
-            this.materials = [this.text,...this.materials];
+            this.materials = [this.text.trim(),...this.materials];
         }
         this.text = '';
         

@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
         paddingLeft:15,
         paddingRight:10,
         margin:5,
-        borderRadius:20, 
+        borderRadius:20,
+       
     },
     text:{
         fontFamily: 'Arial', fontSize: 15, fontWeight:'400'
